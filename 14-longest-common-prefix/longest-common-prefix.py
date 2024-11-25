@@ -29,30 +29,41 @@ class Solution(object):
 
         # return ans
 
-        st = []
-        first_str = strs[0]
+        # st = []
+        # first_str = strs[0]
 
-        for i in range(len(first_str)):
-            st.append(first_str[:i+1])
+        # for i in range(len(first_str)):
+        #     st.append(first_str[:i+1])
 
-        st.reverse()
-        st.append('')
+        # st.reverse()
+        # st.append('')
 
-        current_index = 0
-        i = 0
+        # current_index = 0
+        # i = 0
 
-        while i < len(strs):
-            if st[current_index] == "":
-                return ""
+        # while i < len(strs):
+        #     if st[current_index] == "":
+        #         return ""
 
-            if strs[i].startswith(st[current_index]):
-                i += 1
-            else:
-                i = 0
-                current_index += 1
+        #     if strs[i].startswith(st[current_index]):
+        #         i += 1
+        #     else:
+        #         i = 0
+        #         current_index += 1
 
 
-        return st[current_index]
+        # return st[current_index]
+
+        ans = ""
+
+        for i in range(len(strs[0])):
+            for s in strs:
+                if i >= len(s) or strs[0][i] != s[i]:
+                    return ans
+            
+            ans += strs[0][i]
+
+        return ans
 
 
 
