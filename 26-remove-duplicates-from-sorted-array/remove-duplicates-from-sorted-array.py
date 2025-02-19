@@ -5,12 +5,15 @@ class Solution(object):
         :rtype: int
         """
 
-        replace = 1
-
-        for i in range(1, len(nums)):
-            if nums[i - 1] != nums[i]:
-                nums[replace] = nums[i]
-                replace += 1
+        k = 0 
+        values = {}
         
+        for i in range(len(nums)):
+            if values.get(nums[i]) >= 1:
+                continue
+            else:
+                nums[k] = nums[i] 
+                values[nums[i]] = 1
+                k += 1
 
-        return replace
+        return k
