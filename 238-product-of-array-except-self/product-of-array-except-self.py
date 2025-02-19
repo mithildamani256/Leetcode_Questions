@@ -4,68 +4,31 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
-
-        # prefix = []
-        # prefix_total = 1
-
-        # for val in nums:
-        #     prefix_total = prefix_total * val
-        #     prefix.append(prefix_total)
-        
-        # nums_rev = nums[::-1]
-        # postfix_total = 1
-
-        # postfix = []
-
-        # for val in nums_rev:
-        #     postfix_total = postfix_total * val
-        #     postfix.append(postfix_total)
-        
-        # postfix.reverse()
-
-
-        # answer = []
-        # product_val = 1
-
-        # for i in range(len(postfix)):
-        #     if(i-1 < 0 and i + 1 >= len(nums)):
-        #         answer.append(nums[i])
-        #     elif (i - 1 < 0):
-        #         product_val = postfix[i+1]
-        #     elif(i + 1 >= len(nums)):
-        #         product_val = prefix[i-1]
-        #     else:
-        #         product_val = prefix[i - 1] * postfix[i+1]
-
-        #     answer.append(product_val)
-
-        # return answer
-
-        arr1 = []
-        prefix_val = 1
-        postfix_val = 1
-        arr2 = []
-
-        answer = []
+        value = 1
+        prefix = []
+        postfix = []
 
         for i in range(len(nums)):
-            arr1.insert(i, prefix_val)
+            prefix.append(value)
 
-            prefix_val *= nums[i]
+            value *= nums[i]
 
         nums.reverse()
+        value = 1
 
         for i in range(len(nums)):
-            arr2.insert(i, postfix_val)
+            postfix.append(value)
 
-            postfix_val *= nums[i]
+            value *= nums[i]
 
-        arr2.reverse()
+        postfix.reverse()
 
-        for i in range(len(nums)):
-            value = arr1[i] * arr2[i]
-            answer.insert(i, value)
 
-        return answer
-            
-        
+        for j in range(len(nums)):
+            nums[j] = prefix[j] * postfix[j]
+
+
+        return nums
+
+
+
