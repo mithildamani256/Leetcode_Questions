@@ -5,65 +5,18 @@ class Solution(object):
         :rtype: str
         """
 
-        # ans = ""
-        # mini = len(strs[0])
-        # min_index = 0
-        # counter = -1
-
-        # for i in range(len(strs)):
-        #     if(len(strs[i]) < mini):
-        #         mini = len(strs[i])
-        #         min_index = i
-
-        # smallest_elem = strs[min_index]
-
-        # for val in smallest_elem:
-        #     counter += 1
-        #     for j in strs:
-        #         if (val == j[counter]):
-        #             continue
-        #         else:
-        #             return ans
-            
-        #     ans += val
-
-        # return ans
-
-        # st = []
-        # first_str = strs[0]
-
-        # for i in range(len(first_str)):
-        #     st.append(first_str[:i+1])
-
-        # st.reverse()
-        # st.append('')
-
-        # current_index = 0
-        # i = 0
-
-        # while i < len(strs):
-        #     if st[current_index] == "":
-        #         return ""
-
-        #     if strs[i].startswith(st[current_index]):
-        #         i += 1
-        #     else:
-        #         i = 0
-        #         current_index += 1
-
-
-        # return st[current_index]
-
-        ans = ""
+        longest_substring = ""
 
         for i in range(len(strs[0])):
-            for s in strs:
-                if i >= len(s) or strs[0][i] != s[i]:
-                    return ans
-            
-            ans += strs[0][i]
 
-        return ans
+            for j in range(len(strs)):
+                if i >= len(strs[j]):
+                    return longest_substring
 
+                if strs[0][i] != strs[j][i]:
+                    return longest_substring
 
+            longest_substring += strs[0][i]
+        
 
+        return longest_substring
