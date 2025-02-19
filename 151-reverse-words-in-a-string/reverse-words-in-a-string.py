@@ -5,16 +5,11 @@ class Solution(object):
         :rtype: str
         """
 
-        v = s.split()
-        answer = ""
+        s_list = s.split()
 
-        for i in range(len(v) - 1, -1 , -1):
-            answer += v[i]
-            answer += " "
+        s_list.reverse()
 
-        answer = answer.rstrip()
-        return answer
+        s = " ".join(s_list)
 
-
-
+        return s
         
