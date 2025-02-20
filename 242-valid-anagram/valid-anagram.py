@@ -6,25 +6,19 @@ class Solution(object):
         :rtype: bool
         """
 
-        if (len(s) != len(t)):
-            return False
-        
-        res = {}
+        old = {}
 
         for val in s:
-            if(val not in res):
-                res[val] = 1
-            else:
-                res[val] += 1
-        
+            old[val] = old.get(val, 0) + 1
+
         for val in t:
-            if (val not in res):
+            if old.get(val, 0) == 0:
                 return False
             else:
-                if (res[val] == 0):
-                    return False
-                else:
-                    res[val] -= 1
-        
-        return True
-        
+                old[val] -= 1
+
+        for val in old:
+            if old[val] != 0:
+                return False
+
+        return True        
