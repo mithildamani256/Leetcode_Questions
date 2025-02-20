@@ -5,30 +5,28 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
+        s = s.split()
 
-        lst = s.split()
-        check = {}
-
-        if (len(lst) != len(pattern)):
+        if len(pattern) != len(s):
             return False
+        
+        values = {}
 
-        for i, val in enumerate(pattern):
-            if (val not in check):
-                check[val] = lst[i]
-            else:
-                if (check[val] != lst[i]):
+        for i in range(len(pattern)):
+            if pattern[i] in values:
+                if values[pattern[i]] != s[i]:
                     return False
-        check = {}
-
-        for i, val in enumerate(lst):
-            if (val not in check):
-                check[val] = pattern[i]
             else:
-                if (check[val] != pattern[i]):
+                values[pattern[i]] = s[i]
+
+        values = {}
+
+        for i in range(len(s)):
+            if s[i] in values:
+                if values[s[i]] != pattern[i]:
                     return False
-
-
-        return True
-
+            else:
+                values[s[i]] = pattern[i]
 
         
+        return True
