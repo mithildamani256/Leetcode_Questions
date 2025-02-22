@@ -1,59 +1,40 @@
 class Solution(object):
     def minSubArrayLen(self, target, nums):
-        #   l = 0
-        #   total = 0
-        #   res = len(nums) + 1
+        """
+        :type target: int
+        :type nums: List[int]
+        :rtype: int
+        """
 
-        #   for r in range(len(nums)):
-        #       total += nums[r]
+        # left = 0
+        # min_length = float('inf')
+        # total = 0
 
-        #       while(total >= target ):
-        #           res = min( r - l + 1, res)
-        #           total -= nums[l]
-        #           l += 1
+        # for right in range(len(nums)):
+        #     total += nums[right]
+        #     if total >= target:
+        #         min_length = min(min_length, right - left + 1)
+        #         while total - nums[left] >= target:
+        #             left += 1
+        #             min_length = min(min_length, right - left + 1)
+        #             total = total - nums[left]
 
-        #   if (res > len(nums)):
-        #       return 0
-        #   return res 
+        # if min_length == float('inf'):
+        #     return 0
 
-        # min_length = len(nums) + 1
-
-        # start = 0
-        # end = 0
-        # current_sum = 0
-
-        # while end <= len(nums):
-        #     if current_sum >= target:
-        #         if (end - start) < min_length:
-        #             min_length = end - start
-        #         current_sum -= nums[start]
-        #         start += 1
-        #     else:
-        #         current_sum += nums[end]
-        #         end += 1
-        
-        # if (min_length == len(nums) + 1):
-        #     min_length = 0
-        
         # return min_length
+        left = 0
+        min_length = float('inf')
+        total = 0
 
-        min_len = len(nums) + 1
-        start = 0
-        current_sum = 0
+        for right in range(len(nums)):  # ✅ Expand window with `right`
+            total += nums[right]
 
-        for end in range(1, len(nums) + 1):
-            current_sum += nums[end - 1]
-            while current_sum >= target:
-                if (end - start) < min_len:
-                    min_len = end - start
-                
-                current_sum -= nums[start]
-                start += 1
+            while total >= target:  # ✅ Shrink window with `left`
+                min_length = min(min_length, right - left + 1)
+                total -= nums[left]  # ✅ Reduce window sum correctly
+                left += 1  # ✅ Move left pointer forward
+
+        return min_length if min_length != float('inf') else 0
         
-        if min_len == len(nums) + 1:
-            min_len = 0
         
-        return min_len
-            
-
-                
