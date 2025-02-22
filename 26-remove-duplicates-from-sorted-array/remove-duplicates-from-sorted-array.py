@@ -5,15 +5,14 @@ class Solution(object):
         :rtype: int
         """
 
-        k = 0 
-        values = {}
-        
-        for i in range(len(nums)):
-            if values.get(nums[i]) >= 1:
-                continue
-            else:
-                nums[k] = nums[i] 
-                values[nums[i]] = 1
-                k += 1
+        if len(nums) == 0:
+            return 0
 
+        k = 1
+
+        for i in range(1, len(nums)):
+            if nums[i] != nums[i-1]:
+                nums[k] = nums[i] 
+                k += 1
+        
         return k
