@@ -11,16 +11,13 @@ class Solution(object):
         :rtype: bool
         """
 
-        visited = set()
-        
+        visit = []
+
         while head:
-            if head in visited:
+            if head in visit:
                 return True
-
-            visited.add(head)
-
+            visit.append(head)
             head = head.next
 
         return False
-
             
