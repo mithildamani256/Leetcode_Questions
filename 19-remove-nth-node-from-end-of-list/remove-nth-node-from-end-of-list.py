@@ -10,23 +10,29 @@ class Solution(object):
         :type n: int
         :rtype: Optional[ListNode]
         """
+
+        if head is None:
+            return head
         
+        current = head
+        length = 0
+
+        while current:
+            length += 1
+            current = current.next
+        
+        if length == 1:
+            return None
+        
+        p = length - n
+
         dummy = ListNode()
         dummy.next = head
-
         slow = dummy
-        fast = dummy
 
-        for _ in range(n+1):
-            if not fast:
-                break
-            fast = fast.next
-
-        while fast:
-            fast = fast.next
+        for _ in range(p):
             slow = slow.next
-
-
+        
         slow.next = slow.next.next
 
         return dummy.next
