@@ -52,33 +52,66 @@ class Solution(object):
 
         # return new_head
 
-        if not head or not head.next or k == 0:  # ✅ Handle edge cases
+        # if not head or not head.next or k == 0:  # ✅ Handle edge cases
+        #     return head
+
+        # # Step 1: Compute length
+        # cur = head
+        # p = 1
+        # while cur.next:
+        #     cur = cur.next
+        #     p += 1
+        # tail = cur  # ✅ Store tail for later reconnection
+
+        # # Step 2: Optimize k
+        # k = k % p  # ✅ Ensure no extra rotations
+        # if k == 0:
+        #     return head  # ✅ No change needed
+
+        # # Step 3: Find new head (Stop before breaking)
+        # v = p - k
+        # slow = head
+        # for _ in range(v - 1):  # ✅ Stop one before breaking
+        #     slow = slow.next
+
+        # # Step 4: Rotate list
+        # new_head = slow.next
+        # slow.next = None  # ✅ Break the list
+        # tail.next = head  # ✅ Connect end to old head
+
+        # return new_head  # ✅ Return new hea
+
+
+        current = head
+        length = 0
+
+        while current:
+            current = current.next
+            length +=1
+
+        if length == 0 or length == 1 or k % length == 0:
             return head
+        
+        k = k % length
+        p = length - k
 
-        # Step 1: Compute length
-        cur = head
-        p = 1
-        while cur.next:
-            cur = cur.next
-            p += 1
-        tail = cur  # ✅ Store tail for later reconnection
+        dummy = ListNode()
+        slow = dummy
+        dummy.next = head
 
-        # Step 2: Optimize k
-        k = k % p  # ✅ Ensure no extra rotations
-        if k == 0:
-            return head  # ✅ No change needed
-
-        # Step 3: Find new head (Stop before breaking)
-        v = p - k
-        slow = head
-        for _ in range(v - 1):  # ✅ Stop one before breaking
+        for _ in range(p):
             slow = slow.next
-
-        # Step 4: Rotate list
+        
         new_head = slow.next
-        slow.next = None  # ✅ Break the list
-        tail.next = head  # ✅ Connect end to old head
+        slow.next = None
 
-        return new_head  # ✅ Return new hea
+        current = new_head
+
+        while current.next:
+            current = current.next
+        
+        current.next = head
+
+        return new_head
 
         
