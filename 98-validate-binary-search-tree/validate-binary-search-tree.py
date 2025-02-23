@@ -11,20 +11,13 @@ class Solution(object):
         :rtype: bool
         """
 
-        def dfs(root):
+        def helper(root, left, right):
             if not root:
-                return []
+                return True
+            
+            if root.val <= left or root.val >= right:
+                return False
+            
+            return helper(root.left, left, root.val) and helper(root.right, root.val, right)
 
-            return dfs(root.left) + [root.val] + dfs(root.right)
-
-        lst1 = dfs(root)
-
-        l = set(lst1)
-
-        lst2 = sorted(lst1)
-
-        if lst1==lst2 and len(l) == len(lst1):
-            return True
-        
-        return False
-        
+        return helper(root, float('-inf'), float('inf'))
