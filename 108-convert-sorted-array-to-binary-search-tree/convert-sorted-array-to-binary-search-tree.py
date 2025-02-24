@@ -13,7 +13,7 @@ class Solution(object):
 
         if len(nums) == 0:
             return None
-
+        
         m = len(nums) // 2
 
         root = TreeNode(nums[m])
@@ -22,7 +22,3 @@ class Solution(object):
         root.right = self.sortedArrayToBST(nums[m+1:])
 
         return root
-
-
-        
-        
