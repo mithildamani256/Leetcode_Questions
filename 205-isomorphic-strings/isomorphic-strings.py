@@ -6,27 +6,37 @@ class Solution(object):
         :rtype: bool
         """
 
-        if(len(s) != len(t)):
-            return False
+        hashmap = {}
+        i = 0
 
-        replace = {}
-        
-        for i in range(len(s)):
-            if (s[i] not in replace):
-                replace[s[i]] = t[i]
-            
-            else:
-                if (replace[s[i]] != t[i]):
+        for char_s in s:
+            char_t = t[i]
+            if char_s in hashmap:
+                val = hashmap[char_s]
+
+                if val != char_t:
                     return False
-
-        replace = {}
-
-        for i in range(len(t)):
-            if (t[i] not in replace):
-                replace[t[i]] = s[i]
-            
             else:
-                if (replace[t[i]] != s[i]):
+                hashmap[char_s] = char_t
+
+            i += 1
+
+        hashmap = {}
+        i = 0
+
+        for char_t in t:
+            char_s = s[i]
+            if char_t in hashmap:
+                val = hashmap[char_t]
+
+                if val != char_s:
                     return False
+            else:
+                hashmap[char_t] = char_s
+
+            i += 1
+
+
+        return True
+
         
-        return True   
