@@ -11,28 +11,23 @@ class Solution(object):
         :rtype: Optional[ListNode]
         """
 
-        if head is None:
-            return head
-        
-        current = head
         length = 0
 
+        current = head
+
         while current:
-            length += 1
             current = current.next
+            length += 1
         
-        if length == 1:
-            return None
-        
-        p = length - n
+        iterate = length - n
 
         dummy = ListNode()
+        current = dummy
         dummy.next = head
-        slow = dummy
 
-        for _ in range(p):
-            slow = slow.next
-        
-        slow.next = slow.next.next
+        for _ in range(iterate):
+            current = current.next
+
+        current.next = current.next.next
 
         return dummy.next
