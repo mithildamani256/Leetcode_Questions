@@ -4,16 +4,21 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
+
+        if not nums:
+            return 0
+
+        cur_sum = nums[0]
+        max_sum = nums[0]
+
+        for num in nums[1:]:
+            if cur_sum < 0:
+                cur_sum = 0
+
+            cur_sum += num
+
+            max_sum = max(max_sum, cur_sum)
+
+        return max_sum
+
         
-        maxSum = nums[0]
-        curSum = nums[0]
-
-        for n in nums[1:]:
-            if curSum < 0:
-                curSum = 0
-            curSum += n
-
-            maxSum = max(curSum, maxSum)
-
-        return maxSum
-
