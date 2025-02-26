@@ -11,24 +11,26 @@ class Solution(object):
         :type subRoot: Optional[TreeNode]
         :rtype: bool
         """
-
-        def sameTree(p,q):
+        def sameTree(p, q):
             if not p and not q:
                 return True
             if not p or not q:
                 return False
-            
+
             if p.val != q.val:
                 return False
-            
+
             return sameTree(p.left, q.left) and sameTree(p.right, q.right)
+        
 
         if not root and not subRoot:
             return True
         if not root or not subRoot:
             return False
-
-        if sameTree(root, subRoot) == True:
+        if sameTree(root, subRoot):
             return True
 
         return self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
+
+        
+        
