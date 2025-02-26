@@ -5,13 +5,13 @@ class Solution(object):
         :rtype: bool
         """
         
-        seen = []
+        seen = set()
 
         while n != 1:
             if n in seen:
                 return False
 
-            seen.append(n)
+            seen.add(n)
 
             n = sum(int(digit) ** 2 for digit in str(n))
 
