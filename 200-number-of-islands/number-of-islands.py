@@ -14,7 +14,6 @@ class Solution(object):
 
         def bfs(r,c):
             q = collections.deque([(r,c)])
-            q.append((r,c))
             visit.add((r,c))
 
             while q:
