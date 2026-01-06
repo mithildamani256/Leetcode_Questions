@@ -5,16 +5,9 @@ class Solution(object):
         :rtype: bool
         """
 
-        x = str(x)
-        
-        l = 0
-        r = len(x) - 1
+        s = str(x)
 
-        while l < r:
-            if x[l] == x[r]:
-                l += 1
-                r -= 1
-            else:
+        for i in range(len(s)//2):
+            if s[i] != s[len(s) - i - 1]:
                 return False
-        
-        return True
+        return True    
