@@ -5,11 +5,19 @@ class Solution(object):
         :rtype: int
         """
 
-        values = {}
+        candidate = nums[0]
+        count = 1
 
-        for j in range(len(nums)):
-            values[nums[j]] = 1 + values.get(nums[j], 0) 
-
-            if values[nums[j]] > len(nums) / 2:
-                return nums[j]
+        for val in nums[1:]:
+            if val != candidate:
+                count -= 1
+            else:
+                count += 1
+            
+            if count == 0:
+                count = 1
+                candidate = val
+            
+        
+        return candidate
         
