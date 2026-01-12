@@ -5,18 +5,17 @@ class Solution(object):
         :rtype: bool
         """
 
-        # dynamic programming
-        #greedy has an easier solution but remember to start from the back
+        target = len(nums) - 1
 
-        goal = len(nums) - 1
+        for i in range(len(nums) - 2, -1 , -1):
+            if nums[i] + i >= target:
+                target = i
 
-        for i in range(len(nums) - 1, -1, -1):
-            if i + nums[i] >= goal:
-                goal = i
-
-            if goal == 0:
+            if target == 0:
                 return True
         
+        if target == 0:
+            return True
 
         return False
 
