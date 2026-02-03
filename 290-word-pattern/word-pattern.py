@@ -5,35 +5,28 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
-        s = s.split()
 
-        if len(pattern) != len(s):
-            return False 
+        lst = s.split()
 
-            
-        hashmap = {}
+        if len(pattern) != len(lst):
+            return False
 
-        for i in range(len(pattern)):
-            if pattern[i] in hashmap:
-                value = hashmap[pattern[i]]
+        hashmap_pattern = {}
+        hashmap_s = {}
+        
+        for i in range(len(lst)):
+            a, b = lst[i], pattern[i]
 
-                if value != s[i]:
+            if a in hashmap_s:
+                if hashmap_s[a] != b:
                     return False
-
             else:
-                hashmap[pattern[i]] = s[i]    
+                hashmap_s[a] = b
 
-
-        hashmap = {}
-
-        for i in range(len(s)):
-            if s[i] in hashmap:
-                value = hashmap[s[i]]
-
-                if value != pattern[i]:
+            if b in hashmap_pattern:
+                if hashmap_pattern[b] != a:
                     return False
-
             else:
-                hashmap[s[i]] = pattern[i]   
+                hashmap_pattern[b] = a
 
-        return True 
+        return True
