@@ -10,9 +10,6 @@ class Solution(object):
         for i in range(len(nums) - 2, -1 , -1):
             if nums[i] + i >= target:
                 target = i
-
-            if target == 0:
-                return True
         
         if target == 0:
             return True
