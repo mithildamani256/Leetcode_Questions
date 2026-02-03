@@ -4,31 +4,32 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
-        value = 1
-        prefix = []
-        postfix = []
+
+        prefix_prod = []
+        prefix = 1
 
         for i in range(len(nums)):
-            prefix.append(value)
-
-            value *= nums[i]
-
-        nums.reverse()
-        value = 1
+            prefix_prod.append(prefix)
+            prefix = prefix * nums[i]
+        
+        postfix_prod = []
+        postfix = 1
 
         for i in range(len(nums)):
-            postfix.append(value)
+            postfix_prod.append(postfix)
+            postfix = postfix * nums[len(nums) - i - 1]
 
-            value *= nums[i]
+        result = []
 
-        postfix.reverse()
+        for i in range(len(nums)):
+            cur = prefix_prod[i] * postfix_prod[len(nums) - i -1 ]
+            result.append(cur)
 
+        return result
 
-        for j in range(len(nums)):
-            nums[j] = prefix[j] * postfix[j]
+        
+        
 
+            
 
-        return nums
-
-
-
+        
