@@ -6,26 +6,20 @@ class Solution(object):
         :rtype: None Do not return anything, modify nums in-place instead.
         """
 
+        if k == 0:
+            return nums
+        
         k = k % len(nums)
 
-        # nums.reverse()
+        new_head = nums[len(nums)- k :]
+        new_tail = nums[:len(nums) - k]
+        nums[:] = new_head + new_tail
 
-        # temp = nums[:k]
-        # temp.reverse()
-        # nums[:k] = temp
+        # new_head = nums[len(nums)- k : ]
+        # new_tail = nums[:len(nums)- k]
 
-        # temp = nums[k:]
-        # temp.reverse()
-        # nums[k:] = temp
-        l = k
-        k = len(nums) - k
+        # nums[:] = new_head + new_tail
 
-        temp = nums[ :k]
-        temp2 = nums[k:]
+        # return
 
-        nums[:l] = temp2
-        nums[l:] = temp
-
-        return nums
-
-
+        
