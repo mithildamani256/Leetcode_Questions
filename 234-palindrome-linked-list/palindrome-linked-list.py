@@ -9,23 +9,15 @@ class Solution(object):
         :type head: Optional[ListNode]
         :rtype: bool
         """
-
-        result = []
-
-        cur = head
+        
+        cur = head 
+        lst = []
 
         while cur:
-            result.append(cur.val)
+            lst.append(cur.val)
             cur = cur.next
         
-        i = 0
-        j = len(result) - 1
-
-        while i < j:
-            if result[i] != result[j]:
+        for i in range(len(lst) // 2):
+            if lst[i] != lst[len(lst) - 1 - i]:
                 return False
-            i+= 1
-            j -= 1
-
         return True
-        
