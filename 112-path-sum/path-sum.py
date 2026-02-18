@@ -11,13 +11,20 @@ class Solution(object):
         :type targetSum: int
         :rtype: bool
         """
-        
-        if not root:
-            return False
 
-        if not root.right and not root.left:
-            if root.val != targetSum:
+        def dfs(root, target):
+            if not root:
                 return False
-            return True
+            
+            if not root.left and not root.right:
+                if root.val == target:
+                    return True
+                return False
+            
+            new_target = target - root.val
 
-        return self.hasPathSum(root.left, targetSum - root.val) or self.hasPathSum(root.right, targetSum - root.val)
+            return dfs(root.left, new_target) or dfs(root.right, new_target)
+
+        
+        return dfs(root, targetSum)
+        
