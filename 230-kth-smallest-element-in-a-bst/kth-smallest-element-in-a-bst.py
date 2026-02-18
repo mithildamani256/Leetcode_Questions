@@ -11,14 +11,16 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
-        
-        def dfs(root):
+
+        def inorder(root):
 
             if not root:
                 return []
-            
-            return dfs(root.left) + [root.val] + dfs(root.right)
 
-        lst = dfs(root)
+            return inorder(root.left) + [root.val] + inorder(root.right)
+        
+        inorder_lst = inorder(root)
+        return inorder_lst[k -1]
 
-        return lst[k - 1]
+        
+        
