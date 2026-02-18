@@ -9,22 +9,58 @@ class Solution(object):
         :type head: Optional[ListNode]
         :rtype: Optional[ListNode]
         """
+
+        def merge(left, right):
+            dummy = ListNode()
+            cur = dummy
+
+            while left or right:
+                if left and right:
+                    if left.val > right.val:
+                        cur.next = right
+                        right = right.next
+                    else:
+                        cur.next = left
+                        left = left.next
+                
+                elif left:
+                    cur.next = left
+                    left = left.next
+                
+                else:
+                    cur.next = right
+                    right = right.next
+
+                cur = cur.next
+            
+            return dummy.next
+
+        def search(node):
+            if not node or not node.next:
+                return node 
+
+            length = 0
+            cur = node
+
+            while cur:
+                cur = cur.next
+                length += 1
+            
+            mid = length // 2
+            dummy = ListNode()
+            dummy.next = node
+            cur = dummy
+
+            for _ in range(mid):
+                cur = cur.next
+            
+            right = cur.next
+            cur.next = None
+
+            left_sorted = search(node)
+            right_sorted = search(right)
+
+            return merge(left_sorted, right_sorted)
         
-        current = head
-        lst = []
+        return search(head)
 
-        while current:
-            lst.append(current.val)
-            current = current.next
-
-        lst = sorted(lst)
-
-        update = head
-        i = 0
-
-        while update:
-            update.val = lst[i]
-            update = update.next
-            i += 1
-
-        return head
