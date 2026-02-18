@@ -6,23 +6,22 @@ class Solution(object):
         :rtype: int
         """
 
-        l = 0
-        r = len(nums) - 1
-        res = 0
+        def search():
+            left, right = 0, len(nums) - 1
 
-        while l <= r:
-            m = l + (r-l)//2
+            while left <= right:
+                mid = (left + right) // 2
 
-            if nums[m] > target:
-                r = m -1
-            elif nums[m] < target:
-                l = m + 1
-                res = m + 1
-            else:
-                res = m 
-                break
+                if nums[mid] == target:
+                    return mid
+                elif nums[mid] > target:
+                    right = mid - 1
+                else:
+                    left = mid + 1
 
-        return res
+            return left
+        
+        position =  search()
 
-            
-            
+        return position
+        
