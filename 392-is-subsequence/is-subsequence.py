@@ -5,21 +5,18 @@ class Solution(object):
         :type t: str
         :rtype: bool
         """
-        
-        l = 0
-        r = 0
 
-        while r < len(t):
-            if l >= len(s):
-                return True
-                
-            if s[l] == t[r]:
-                l += 1
-                r += 1
-            else:
-                r += 1
-
-        if l == len(s):
+        if s == "":
             return True
 
+        i = 0
+
+        for val in t:
+            if s[i] == val:
+                i += 1
+            
+            if i == len(s):
+                return True
+
         return False
+        
