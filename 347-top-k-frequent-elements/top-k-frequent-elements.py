@@ -6,32 +6,20 @@ class Solution(object):
         :rtype: List[int]
         """
 
-        freq = [[] for i in range(len(nums) + 1)]
-
         hashmap = {}
-        res = []
+        heap = []
 
-        for i in range(len(nums)):
-            hashmap[nums[i]] = hashmap.get(nums[i], 0) + 1
-
-        print(hashmap)
-
-        for value in hashmap:
-            count = hashmap[value]
-            freq[count].append(value)
-
-        print(freq)
-
-        for i in range(len(freq) - 1, -1, -1):
-            for val in freq[i]:
-                if len(res) == k:
-                    return res
-                
-                res.append(val)
-
-        return res
-
-
-
+        for value in nums:
+            hashmap[value] = hashmap.get(value, 0) + 1
         
+        for value in hashmap:
+            heapq.heappush(heap, (- hashmap[value], value))
+
+        result = []
+
+        for _ in range(k):
+            count, value = heapq.heappop(heap)
+            result.append(value)
+
+        return result
         
