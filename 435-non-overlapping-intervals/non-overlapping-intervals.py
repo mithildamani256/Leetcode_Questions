@@ -5,16 +5,19 @@ class Solution(object):
         :rtype: int
         """
 
-        intervals.sort()
-        
-        res = 0
-        prevEnd = intervals[0][1]
+        intervals.sort(key = lambda x: x[0])
 
-        for start,end in intervals[1:]:
-            if prevEnd > start:
-                res += 1
-                prevEnd = min(end, prevEnd)
+        current = intervals[0]
+        overlapping = 0
+
+        for interval in intervals[1:]:
+            start, end = interval
+
+            if start < current[1]:
+                overlapping += 1
+                if end < current[1]:
+                    current = interval
             else:
-                prevEnd = end
+                current = interval
 
-        return res
+        return overlapping
