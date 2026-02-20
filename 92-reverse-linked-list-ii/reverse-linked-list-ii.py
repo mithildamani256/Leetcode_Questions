@@ -12,59 +12,35 @@ class Solution(object):
         :rtype: Optional[ListNode]
         """
 
-        current = head
-        length = 0
-
-        while current:
-            current = current.next
-            length += 1
-        
-        if length == 0 or length == 1 or left == right:
+        if not head or not head.next or left == right:
             return head
 
-        dummy = ListNode(-501)
-        new_head = dummy
+        dummy = ListNode()
         dummy.next = head
+
+        before = dummy
 
         for _ in range(left - 1):
-            new_head = new_head.next
-
-        dummy = ListNode()
-        new_tail = dummy
-        dummy.next = head
-
-        for _ in range(right + 1):
-            new_tail = new_tail.next
-
-        dummy = ListNode()
-        leftNode = dummy
-        dummy.next = head
-
-        for _ in range(left):
-            leftNode = leftNode.next
-
-        dummy = ListNode()
-        rightNode = dummy
-        dummy.next = head
-
-        for _ in range(right):
-            rightNode = rightNode.next  
-
+            before = before.next
+        
+        cur = before.next
         prev = None
-        lefty = leftNode
 
         for _ in range(right - left + 1):
-            nxt = lefty.next
-            lefty.next = prev
-            prev = lefty
-            lefty = nxt
+            nxt = cur.next
+            cur.next = prev
+            prev = cur
+            cur = nxt
 
-        leftNode.next = new_tail
+        node = before.next
+        before.next = prev
+        node.next = nxt
 
-        if left != 1:
-            new_head.next = prev
-            return head
-        else:
-            return prev
+        return dummy.next
+        
+
+        
+
+
         
         
