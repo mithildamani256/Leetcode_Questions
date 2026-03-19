@@ -10,7 +10,7 @@ class Solution(object):
 
         for i in range(len(nums)):
             if nums[i] != val:
-                nums[j], nums[i] = nums[i], nums[j]
+                nums[j] = nums[i]
                 j += 1
         
         return j
