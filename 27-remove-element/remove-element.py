@@ -5,15 +5,13 @@ class Solution(object):
         :type val: int
         :rtype: int
         """
-        k = 0
 
-        while val in nums:
-            nums.remove(val)
-            k += 1
+        j = 0
 
-        for i in range(k):
-            nums.append(val)
-
-        return len(nums) - k
-
-
+        for i in range(len(nums)):
+            if nums[i] != val:
+                nums[j], nums[i] = nums[i], nums[j]
+                j += 1
+        
+        return j
+        
