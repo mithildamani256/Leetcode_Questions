@@ -8,29 +8,26 @@ class Solution(object):
         :rtype: None Do not return anything, modify nums1 in-place instead.
         """
 
-        lst3 = []
+        k = m + n - 1
+        m = m - 1
+        n = n - 1
 
-        i = 0
-        j = 0
-
-        while i < m and j < n:
-            if nums1[i] < nums2[j]:
-                lst3.append(nums1[i])
-                i += 1
+        while m >= 0 and n >= 0:
+            if nums1[m] > nums2[n]:
+                nums1[k] = nums1[m]
+                m -= 1
             else:
-                lst3.append(nums2[j])
-                j += 1
+                nums1[k] = nums2[n]
+                n -= 1
+            k -= 1
         
-        while i < m:
-            lst3.append(nums1[i])
-            i += 1
-
-        while j < n:
-            lst3.append(nums2[j])
-            j += 1
-
-        print(lst3)
-
-        for i in range(m+n):
-            nums1[i] = lst3[i]
-
+        while m >= 0:
+            nums1[k] = nums1[m]
+            m -= 1
+            k -= 1
+        
+        while n >= 0:
+            nums1[k] = nums2[n]
+            n -= 1
+            k -= 1       
+    
