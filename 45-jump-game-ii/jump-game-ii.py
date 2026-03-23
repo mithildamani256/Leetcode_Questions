@@ -4,22 +4,20 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        n = len(nums)
-        if n <= 1:
-            return 0
 
-        jumps = 0
-        cur_end = 0      # farthest index we can reach with current number of jumps
-        farthest = 0     # farthest index we can reach by taking one more step within current range
+        res = 0
 
-        for i in range(n - 1):  # no need to jump from last index
-            farthest = max(farthest, i + nums[i])
+        left = 0
+        right = 0
 
-            # when we reach the end of the current jump range, we must "take" a jump
-            if i == cur_end:
-                jumps += 1
-                cur_end = farthest
-                if cur_end >= n - 1:
-                    break
+        while right < len(nums) - 1:
+            farthest = 0
 
-        return jumps
+            for i in range(left, right + 1):
+                farthest = max(farthest, i + nums[i])
+            left = right + 1
+            right = farthest
+            res += 1
+        
+        return res
+        
