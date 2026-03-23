@@ -5,31 +5,23 @@ class Solution(object):
         :rtype: List[int]
         """
 
-        prefix_prod = []
-        prefix = 1
+        if len(nums) == 0:
+            return []
+
+        result = [1] * len(nums)
+
+        prod = 1
 
         for i in range(len(nums)):
-            prefix_prod.append(prefix)
-            prefix = prefix * nums[i]
-        
-        postfix_prod = []
-        postfix = 1
+            result[i] = result[i] * prod
+            prod = prod * nums[i]
 
-        for i in range(len(nums)):
-            postfix_prod.append(postfix)
-            postfix = postfix * nums[len(nums) - i - 1]
+        prod = 1
 
-        result = []
-
-        for i in range(len(nums)):
-            cur = prefix_prod[i] * postfix_prod[len(nums) - i -1 ]
-            result.append(cur)
+        for i in range(len(nums) - 1, -1, -1):
+            result[i] = result[i] * prod
+            prod = prod * nums[i]
 
         return result
-
-        
-        
-
-            
 
         
