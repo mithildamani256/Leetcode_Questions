@@ -5,16 +5,18 @@ class Solution(object):
         :rtype: bool
         """
 
-        target = len(nums) - 1
-
-        for i in range(len(nums) - 2, -1 , -1):
-            if nums[i] + i >= target:
-                target = i
-        
-        if target == 0:
+        if len(nums) == 1:
             return True
 
-        return False
+        target = len(nums) - 1
 
+        for i in range(len(nums) - 2, -1, -1):
+            if i + nums[i] >= target:
+                target = i
+            if target == 0:
+                return True
+
+        return False
+            
 
         
