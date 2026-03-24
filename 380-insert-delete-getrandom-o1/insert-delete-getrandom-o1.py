@@ -1,10 +1,8 @@
-import random
-
 class RandomizedSet(object):
 
     def __init__(self):
-        self.values_dict = {}
-        self.values_list = []
+        self.values = []
+        self.values_mapping = {}
 
     def insert(self, val):
         """
@@ -12,13 +10,14 @@ class RandomizedSet(object):
         :rtype: bool
         """
 
-        if val in self.values_dict:
+        if val in self.values_mapping:
             return False
-        else:
-            self.values_dict[val] = len(self.values_list)
-            self.values_list.append(val)
+        
+        length = len(self.values)
+        self.values.append(val)
+        self.values_mapping[val] = length
 
-            return True
+        return True
 
     def remove(self, val):
         """
@@ -26,36 +25,33 @@ class RandomizedSet(object):
         :rtype: bool
         """
 
-        if val not in self.values_dict:
+        if val not in self.values:
             return False
-        else:
-            index = self.values_dict[val]
-            last_value = self.values_list[-1]
 
-            self.values_dict[last_value] = index
-            self.values_list[index] = last_value
+        val_index = self.values_mapping[val]
 
-            self.values_list.pop()
-            del self.values_dict[val]
+        last_value = self.values[-1]
+        self.values[val_index] = self.values[-1]
+        self.values.pop()
 
-            return True
+        self.values_mapping[last_value] = val_index
+        del self.values_mapping[val]
+
+        return True
 
     def getRandom(self):
         """
         :rtype: int
         """
 
-        value = random.choice(self.values_list)
-
-        return value
-
-
-
-        
-
+        return random.choice(self.values)
+    
 
 # Your RandomizedSet object will be instantiated and called as such:
 # obj = RandomizedSet()
 # param_1 = obj.insert(val)
 # param_2 = obj.remove(val)
 # param_3 = obj.getRandom()
+
+
+# [1,3] {1:0, 3:1} ,,,,,, remove(2), val_index = 1, last_index = 2
