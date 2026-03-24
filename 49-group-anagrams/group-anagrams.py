@@ -4,19 +4,20 @@ class Solution(object):
         :type strs: List[str]
         :rtype: List[List[str]]
         """
-        
-        anagrams = {}
+
         result = []
 
-        for word in strs:
-            keyword = "".join(sorted(word))
+        hashmap = {}
 
-            if keyword not in anagrams:
-                anagrams[keyword] = []
+        for value in strs:
+            keyword = "".join(sorted(value))
 
-            anagrams[keyword].append(word)
+            if keyword in hashmap:
+                hashmap[keyword].append(value)
+            else:
+                hashmap[keyword] = [value]
 
-        for values in anagrams:
-            result.append(anagrams[values])
+        for keyword in hashmap:
+            result.append(hashmap[keyword])
 
-        return result
+        return result        
