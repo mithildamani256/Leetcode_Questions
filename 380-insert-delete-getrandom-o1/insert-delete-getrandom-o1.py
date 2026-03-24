@@ -25,13 +25,13 @@ class RandomizedSet(object):
         :rtype: bool
         """
 
-        if val not in self.values:
+        if val not in self.values_mapping:
             return False
 
         val_index = self.values_mapping[val]
-
         last_value = self.values[-1]
-        self.values[val_index] = self.values[-1]
+
+        self.values[val_index] = last_value
         self.values.pop()
 
         self.values_mapping[last_value] = val_index
