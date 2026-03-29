@@ -5,42 +5,34 @@ class Solution(object):
         :type prerequisites: List[List[int]]
         :rtype: bool
         """
+        adj = defaultdict(list)
 
+        for course, pre in prerequisites:
 
-        preMap = defaultdict(list)
-
-        for crs, pre in prerequisites:
-            preMap[crs].append(pre)
+            adj[course].append(pre)
 
         visit = set()
 
-        def dfs(crs):
-            if crs in visit:
+        def dfs(course):
+            if course in visit:
                 return False
-            
-            if preMap[crs] == []:
+            if adj[course] == []:
                 return True
-            
-            visit.add(crs)
 
-            for pre in preMap[crs]:
+            visit.add(course)
+            
+            for pre in adj[course]:
                 if not dfs(pre):
                     return False
+                adj[pre] = []
+            
+            visit.remove(course)
+            adj[course] = []
 
-            visit.remove(crs)
-            preMap[crs] = []
             return True
 
-        for crs in range(numCourses):
-            if not dfs(crs):
+        for i in range(numCourses):
+            if not dfs(i):
                 return False
         
-
         return True
-
-        
-
-        
-        
-
-        
