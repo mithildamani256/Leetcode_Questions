@@ -6,6 +6,9 @@ class Solution(object):
         :rtype: int
         """
 
+        if nums == []:
+            return 0
+
         j = 0
 
         for i in range(len(nums)):
@@ -14,4 +17,7 @@ class Solution(object):
                 j += 1
         
         return j
+
+
+
         
