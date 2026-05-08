@@ -7,7 +7,9 @@ class Solution(object):
         """
 
         k = k % len(nums)
-        k = len(nums) - k
 
-        nums[:] =  nums[k:] + nums[:k]
-        
+        first_half_nums = nums[:len(nums) - k]
+        second_half_nums = nums[len(nums) - k : ]
+
+
+        nums[:] = second_half_nums + first_half_nums
