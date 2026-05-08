@@ -4,22 +4,22 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-
-        #boyer moore algorithm
-
+        
         candidate = nums[0]
         count = 1
 
-        for value in nums[1:]:
-            if value == candidate:
-                count += 1
-            else:
+        for val in nums[1:]:
+            if val != candidate:
                 count -= 1
-            
+            else:
+                count += 1
+                
             if count == 0:
-                candidate = value
+                candidate = val
                 count = 1
         
         return candidate
-        
-        
+
+# {2, 2, 1 , 2}
+
+
