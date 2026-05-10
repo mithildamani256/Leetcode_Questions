@@ -4,20 +4,21 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-
-        res = 0
-
+        counter = 0
         left = 0
-        right = 0
+        right = 1
+        right_boundary = 0
 
-        while right < len(nums) - 1:
-            farthest = 0
+        while len(nums) - 1 >= right:
+            for i in range(left, right):
+                boundary = i + nums[i]
+                right_boundary = max(right_boundary, boundary)
+            
+            left = right 
+            right = right_boundary + 1
+            counter += 1
+        
+        return counter
 
-            for i in range(left, right + 1):
-                farthest = max(farthest, i + nums[i])
-            left = right + 1
-            right = farthest
-            res += 1
-        
-        return res
-        
+# {2,3,0,1,4}
+# left 0, right 1 => left = 1, right = 3
