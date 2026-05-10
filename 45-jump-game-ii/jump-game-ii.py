@@ -6,16 +6,17 @@ class Solution(object):
         """
         counter = 0
         left = 0
-        right = 1
-        right_boundary = 0
+        right = 0
 
-        while len(nums) - 1 >= right:
-            for i in range(left, right):
+        while len(nums) - 1 > right:
+            right_boundary = 0
+
+            for i in range(left, right + 1):
                 boundary = i + nums[i]
                 right_boundary = max(right_boundary, boundary)
             
-            left = right 
-            right = right_boundary + 1
+            left = right + 1
+            right = right_boundary
             counter += 1
         
         return counter
