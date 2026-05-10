@@ -5,18 +5,16 @@ class Solution(object):
         :rtype: int
         """
 
-        max_profit = 0
-        buy_day = 0
+        buy_price = prices[0]
+        profit = 0
 
         for i in range(1, len(prices)):
-            if prices[i] - prices[buy_day] > max_profit:
-                max_profit = prices[i] - prices[buy_day]
-            
-            if prices[i] < prices[buy_day]:
-                buy_day = i
+            if prices[i] < buy_price:
+                buy_price = prices[i]
+            else:
+                profit = max(profit, prices[i] - buy_price)
 
-        return max_profit
-
+        return profit
 
 
-        
+
