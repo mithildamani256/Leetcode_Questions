@@ -5,23 +5,21 @@ class Solution(object):
         :rtype: List[int]
         """
 
-        if len(nums) == 0:
-            return []
+        output = [1] * len(nums)
+        prefix = 1
 
-        result = [1] * len(nums)
-
-        prod = 1
-
-        for i in range(len(nums)):
-            result[i] = result[i] * prod
-            prod = prod * nums[i]
-
-        prod = 1
-
-        for i in range(len(nums) - 1, -1, -1):
-            result[i] = result[i] * prod
-            prod = prod * nums[i]
-
-        return result
-
+        for i in range(0, len(nums) - 1):
+            prefix = prefix * nums[i]
+            output[i+1] = prefix
         
+        suffix = 1
+
+        for i in range(len(nums) -1 , 0, -1):
+            suffix = suffix * nums[i]
+            output[i - 1] *= suffix
+
+        return output
+         
+# {3,4,5,6}
+# prefix => {1,3,12, 60}
+# suffix => {}
