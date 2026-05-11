@@ -5,11 +5,6 @@ class Solution(object):
         :rtype: str
         """
 
-        s_list = s.split()
+        list_s = s.split()
 
-        s_list.reverse()
-
-        s = " ".join(s_list)
-
-        return s
-        
+        return " ".join(list_s[::-1])   
