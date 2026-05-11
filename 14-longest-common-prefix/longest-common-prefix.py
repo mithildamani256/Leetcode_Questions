@@ -5,18 +5,30 @@ class Solution(object):
         :rtype: str
         """
 
-        longest_substring = ""
+        if not strs:
+            return ""
+
+        substr = ""
 
         for i in range(len(strs[0])):
+            compare_char = strs[0][i]
 
-            for j in range(len(strs)):
-                if i >= len(strs[j]):
-                    return longest_substring
+            for word in strs[1:]:
+                if i >= len(word) or compare_char != word[i]:
+                    return substr
+            substr += compare_char
 
-                if strs[0][i] != strs[j][i]:
-                    return longest_substring
+        return substr
 
-            longest_substring += strs[0][i]
-        
+# for i in len(strs[0]):
+#     compare_char = strs[i]
+#     for word in strs[1:]:
+        #   if compare_char is not equal to word[i]:
+            # return substr
 
-        return longest_substring
+        # substr = substr + compare_char
+
+# return substr
+
+# strs = ["flower","flow","flight"]
+
