@@ -1,28 +1,36 @@
-from collections import defaultdict
-
 class Solution(object):
     def isValidSudoku(self, board):
         """
         :type board: List[List[str]]
         :rtype: bool
         """
+        
+        rows = [[] for _ in range(9)]
+        cols = [[] for _ in range(9)]
 
-        # basically a matrix is a list of lists.
+        boxes = [[] for _ in range(9)]
 
-        rows = defaultdict(set)
-        columns = defaultdict(set)
-        squares = defaultdict(set)
+        for i in range(9):
+            for j in range(9):
+                character = board[i][j]
 
-        for r in range(9):
-            for c in range(9):
-                if board[r][c] == ".":
+                if character == ".":
                     continue
 
-                if (board[r][c] in rows[r] or board[r][c] in columns[c] or board[r][c] in squares[(r//3, c//3)]):
+                if character in rows[i]:
                     return False
                 
-                rows[r].add(board[r][c])
-                columns[c].add(board[r][c])
-                squares[(r//3, c//3)].add(board[r][c])
+                if character in cols[j]:
+                    return False
+                
+                rows[i].append(character)
+                cols[j].append(character)
+
+                current_box = (i // 3) * 3 + (j // 3)
+
+                if character in boxes[current_box]:
+                    return False
+                
+                boxes[current_box].append(character)
 
         return True
