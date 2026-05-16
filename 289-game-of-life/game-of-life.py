@@ -42,8 +42,6 @@ class Solution(object):
                     else:
                         board[i][j] = 0
 
-        print(board)
-
         for i in range(rows):
             for j in range(cols):
                 if board[i][j] == 2:
