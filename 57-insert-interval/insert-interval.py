@@ -6,18 +6,17 @@ class Solution(object):
         :rtype: List[List[int]]
         """
 
-        intervals.append(newInterval)
+        res = []
 
-        intervals = sorted(intervals, key = lambda x: x[0])
-        output = [intervals[0]]
-
-        for start,end in intervals[1:]:
-            max_end = output[-1][1]
-
-            if max_end >= start:
-                output[-1][1] = max(max_end, end)
-
+        for i in range(len(intervals)):
+            if newInterval[1] < intervals[i][0]:
+                res.append(newInterval)
+                return res + intervals[i:]
+            elif newInterval[0] > intervals[i][1]:
+                res.append(intervals[i])
             else:
-                output.append([start, end])
+                newInterval = [min(intervals[i][0], newInterval[0]), max(intervals[i][1], newInterval[1])]
 
-        return output
+        res.append(newInterval)
+
+        return res
