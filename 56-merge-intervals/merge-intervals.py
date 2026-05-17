@@ -5,24 +5,28 @@ class Solution(object):
         :rtype: List[List[int]]
         """
 
-        intervals = sorted(intervals, key = lambda x : x[0])
+        intervals.sort(key = lambda x : x[0])
 
-        output = [intervals[0]]
+        last_start, last_end = intervals[0][0], intervals[0][1]
 
-        for start, end in intervals[1:]:
-            max_end = output[-1][1]
+        result = [intervals[0]]
 
-            if max_end >= start:
-                output[-1][1] = max(max_end, end)
+        for i in range(1, len(intervals)):
+            cur_start, cur_end = intervals[i][0], intervals[i][1]
+
+            if cur_start <= last_end:
+                end = max(cur_end, last_end)
+                result[-1] = [last_start, end]
 
             else:
-                output.append([start, end])
+                result.append(intervals[i])
+
+            last_start = result[-1][0]
+            last_end = result[-1][1]
+
+        return result
 
         
-        return output
-    
-        
-
-            
-
-        
+# 1         ->          13
+#   2 -> 6
+#            8 - > 10
