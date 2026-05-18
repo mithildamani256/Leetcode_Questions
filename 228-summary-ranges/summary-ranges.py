@@ -5,27 +5,41 @@ class Solution(object):
         :rtype: List[str]
         """
 
-        visit = set()
-        return_lst = []
+        if not nums:
+            return []
 
-        for num in nums:
-            if num in visit:
-                continue
+        res = []
 
-            visit.add(num)
-            current_set = set()
-            current_set.add(num)
-            value = num + 1
+        cur_start, cur_end = nums[0], nums[0]
 
-            while value in nums:
-                current_set.add(value)
-                visit.add(value)
-                value += 1
+        for i in range(1, len(nums)):
+            if nums[i] - 1 == cur_end:
+                cur_end = nums[i]
+            else:
+                if cur_start == cur_end:
+                    s = str(cur_start)
+                    res.append(s)
+                else:
+                    res.append(str(cur_start) + "->" + str(cur_end))
 
-            current = "{}->{}".format(num, value - 1) if num != value - 1 else "{}".format(num)
-
-            return_lst.append(current)
+                cur_start = nums[i]
+                cur_end = nums[i]
         
-        return return_lst
+        if cur_start == cur_end:
+            s = str(cur_start)
+            res.append(s)
+        else:
+            res.append(str(cur_start) + "->" + str(cur_end))
 
+        return res
         
+# [0,2,3,4,6,8,9]
+#  cur_start = 0
+#  cur_end = 0
+#  for i in range(1, len(nums)):
+#          if nums[i] - 1 == cur_end:
+                    # cur_end = nums[i]
+            # else:
+                    # res.append(cur_start->cur_end)
+                    # cur_start, cur_end = nums[i]
+#  cur_end 
