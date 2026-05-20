@@ -11,31 +11,35 @@ class Solution(object):
         :rtype: Optional[ListNode]
         """
 
-        dummy = ListNode()
-        current = dummy
+        dummy = ListNode(0)
+        result = dummy
 
         while list1 or list2:
             if list1 and list2:
-                if list1.val > list2.val:
-                    current.next = ListNode(list2.val)
+                if list1.val >= list2.val:
+                    result.next = ListNode(list2.val)
                     list2 = list2.next
                 else:
-                    current.next = ListNode(list1.val)
+                    result.next = ListNode(list1.val)
                     list1 = list1.next
-                current = current.next
-
             elif list1:
-                current.next = ListNode(list1.val)
-                current = current.next
-
+                result.next = ListNode(list1.val)
                 list1 = list1.next
-            
             else:
-                current.next = ListNode(list2.val)
-                current = current.next
+                result.next = ListNode(list2.val)
+                list2 = list2.next
 
-                list2 = list2.next  
+            result = result.next
 
         return dummy.next
-                
+
+
+#  while list1 or list2:
+    # if list1 and list2:
+    #       compare list1.val and list2.val:
+            # and based on that: add value to result and increment for correct list
+    # if list1:
+        # result.next = ListNode(list1.val)
+        # list1 = list1.next
+        # result = result.next
         
