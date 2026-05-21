@@ -10,108 +10,54 @@ class Solution(object):
         :type k: int
         :rtype: Optional[ListNode]
         """
-        # if not head:
-        #     return head
 
-        # cur = head
-        # p = 0
+        if not head:
+            return None
 
-        # while cur:
-        #     p += 1
-        #     cur = cur.next
+        length = 1
 
-        # k = k % p
+        cur = head
 
-        # if k == 0:
-        #     return head
+        while cur.next:
+            cur = cur.next
+            length += 1
 
-        # v = p - k
+        joining_node = cur
 
-        # slow = head
-        # fast = head
-
-        # for _ in range(v):
-        #     fast = fast.next
-        
-        # while fast:
-        #     slow = slow.next
-        #     fast = fast.next
-        
-        # new_head = slow.next
-        # slow.next = None
-
-        # dummy = new_head
-
-        # while dummy:
-        #     if dummy.next is not None:
-        #         dummy = dummy.next
-        #     else:
-        #         break
-        
-        # dummy.next = head
-
-        # return new_head
-
-        # if not head or not head.next or k == 0:  # ✅ Handle edge cases
-        #     return head
-
-        # # Step 1: Compute length
-        # cur = head
-        # p = 1
-        # while cur.next:
-        #     cur = cur.next
-        #     p += 1
-        # tail = cur  # ✅ Store tail for later reconnection
-
-        # # Step 2: Optimize k
-        # k = k % p  # ✅ Ensure no extra rotations
-        # if k == 0:
-        #     return head  # ✅ No change needed
-
-        # # Step 3: Find new head (Stop before breaking)
-        # v = p - k
-        # slow = head
-        # for _ in range(v - 1):  # ✅ Stop one before breaking
-        #     slow = slow.next
-
-        # # Step 4: Rotate list
-        # new_head = slow.next
-        # slow.next = None  # ✅ Break the list
-        # tail.next = head  # ✅ Connect end to old head
-
-        # return new_head  # ✅ Return new hea
-
-
-        current = head
-        length = 0
-
-        while current:
-            current = current.next
-            length +=1
-
-        if length == 0 or length == 1 or k % length == 0:
-            return head
-        
         k = k % length
-        p = length - k
 
-        dummy = ListNode()
-        slow = dummy
-        dummy.next = head
+        if k == 0:
+            return head
 
-        for _ in range(p):
+        fast = head
+
+        for _ in range(k):
+            fast = fast.next
+
+        slow = head
+
+        while fast.next:
             slow = slow.next
-        
-        new_head = slow.next
-        slow.next = None
+            fast = fast.next
 
-        current = new_head
-
-        while current.next:
-            current = current.next
-        
-        current.next = head
+        end_node = slow
+        new_head = end_node.next
+        joining_node.next = head
+        end_node.next = None
 
         return new_head
 
-        
+
+#   head     end. new. joining_point
+# 1 -> 2 -> 3 -> 4 -> 5
+#  k = 2
+
+#  4 -> 5 ->       1 -> 2 -> 3
+
+# k > len(List) => k = k % len(list)
+# keep a pointer for the last node in the list = 5
+#  slow, fast pointers to get to (len(list) - k)th node = 3
+#  next node = (len(list) - k)th node. next = 4
+#  3.next = None
+# last node.next = 1
+# return 4
