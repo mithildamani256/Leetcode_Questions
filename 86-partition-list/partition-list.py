@@ -11,8 +11,11 @@ class Solution(object):
         :rtype: Optional[ListNode]
         """
 
-        dummyLesser = ListNode()
-        lower = dummyLesser
+        if not head:
+            return None
+        
+        dummyLower = ListNode()
+        lower = dummyLower
 
         dummyGreater = ListNode()
         greater = dummyGreater
@@ -26,11 +29,20 @@ class Solution(object):
             else:
                 greater.next = cur
                 greater = greater.next
-
+            
             cur = cur.next
-
-        greater.next = None
-        lower.next = dummyGreater.next
-
-        return dummyLesser.next
         
+        lower.next = dummyGreater.next
+        greater.next = None
+
+        return dummyLower.next
+
+    
+# 1 -> 4 -> 3 -> 5, value is 4
+
+# 1 -> 3 -> 4 -> 5 
+
+# lower: 1 -> 3
+# greater: 4 -> 5
+
+# 1 -> 3 -> 4 -> 5
