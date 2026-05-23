@@ -17,26 +17,56 @@ class Solution(object):
 
         if not root:
             return None
+        
+        if root.left:
+            if root.right:
+                root.left.next = root.right
+            else:
+                next_node = root.next
 
-        queue = deque([root])
+                while next_node:
+                    if next_node.left:
+                        root.left.next = next_node.left
+                        break
 
-        while queue:
-            size = len(queue)
-            prev = None  # Keeps track of the previous node in the same level
-            
-            for _ in range(size):
-                node = queue.popleft()  # Remove from front of queue
+                    if next_node.right:
+                        root.left.next = next_node.right
+                        break
 
-                if prev:
-                    prev.next = node  # Link previous node to current node
-                
-                prev = node  # Update previous node
-                
-                if node.left:
-                    queue.append(node.left)
-                if node.right:
-                    queue.append(node.right)
+                    next_node = next_node.next
+        
+        if root.right:
+            next_node = root.next
 
-            # The last node in the level should point to None (already default)
+            while next_node:
+                if next_node.left:
+                    root.right.next = next_node.left
+                    break
 
-        return root  # Return the modified tree
+                if next_node.right:
+                    root.right.next = next_node.right
+                    break
+
+                next_node = next_node.next
+        
+        self.connect(root.right)
+        self.connect(root.left)
+
+        return root
+        
+#           1
+#          / \
+#         2-> 3
+#        / \   \
+#       4   7    6
+#      / \   \
+#     7-> 8.  9
+
+# start at root. then i know that for the root.left , the next pointer would be to root.right
+# for root.right, the next pointer would be the next pointer to root, and then root.left if root.left else root.right.
+# for root.left, if there is no root.right, then we access the root.next = next and then next.left if next.left otherwise next.right. 
+
+# start at 1 -> if root.left: root.left.next = root.left.next = root.right or root.next.left or root.next.right
+# look at 2 -> if root.left: root.left.next = root.right or root.next.left or root.next.right
+# look at 5 -> if root.right: root.right.next = root.next.left or root.next.right if root.next else None
+
