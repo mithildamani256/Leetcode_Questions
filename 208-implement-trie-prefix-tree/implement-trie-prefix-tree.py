@@ -1,4 +1,4 @@
-class TrieNode:
+class TrieNode(object):
     def __init__(self):
         self.children = {}
         self.endOfWord = False
@@ -7,7 +7,7 @@ class Trie(object):
 
     def __init__(self):
         self.root = TrieNode()
-
+         
     def insert(self, word):
         """
         :type word: str
@@ -15,45 +15,46 @@ class Trie(object):
         """
 
         cur = self.root
+        
         for c in word:
             if c not in cur.children:
                 cur.children[c] = TrieNode()
             cur = cur.children[c]
-
-        cur.endOfWord = True
         
+        cur.endOfWord = True
 
     def search(self, word):
         """
         :type word: str
         :rtype: bool
         """
-        
+
         cur = self.root
 
-        for c in word:
-            if c not in cur.children:
+        for char in word:
+            if char not in cur.children:
                 return False
-            cur = cur.children[c]
+            
+            cur = cur.children[char]
         
-        if cur.endOfWord == True:
-            return True
-        return False
+        return cur.endOfWord
 
     def startsWith(self, prefix):
         """
         :type prefix: str
         :rtype: bool
         """
+
         cur = self.root
 
-        for c in prefix:
-            if c not in cur.children:
+        for char in prefix:
+            if char not in cur.children:
                 return False
-            cur = cur.children[c]
-
+            
+            cur = cur.children[char]
+        
         return True
-
+        
 
 
 # Your Trie object will be instantiated and called as such:
@@ -61,3 +62,9 @@ class Trie(object):
 # obj.insert(word)
 # param_2 = obj.search(word)
 # param_3 = obj.startsWith(prefix)
+
+
+# how does a trie look
+
+
+#  {   children = {a : TrieNode, b: TrieNode, d :TrieNode, c: TrieNode()},  endofwrod = F     }
