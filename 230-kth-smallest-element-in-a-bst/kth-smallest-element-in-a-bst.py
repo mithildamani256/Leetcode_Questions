@@ -12,15 +12,54 @@ class Solution(object):
         :rtype: int
         """
 
-        def inorder(root):
+        stack = []
+        counter = 0
+        cur = root 
 
-            if not root:
-                return []
+        while cur or stack:
+            while cur:
+                stack.append(cur)
+                cur = cur.left
+            
+            current_element = stack.pop()
+            counter += 1
 
-            return inorder(root.left) + [root.val] + inorder(root.right)
-        
-        inorder_lst = inorder(root)
-        return inorder_lst[k -1]
+            if counter == k:
+                return current_element.val
 
+            cur = current_element.right
         
-        
+        return
+
+#            3
+#          /. \ 
+#         1.   4
+#          \
+#           2 , k = 3
+
+# stack = [3]
+
+# pop 3.  counter = 3 
+# return 3
+
+
+# iterative inorder dfs traversal
+# stack = []
+# cur = root
+# coutner = 0
+# while cur:
+#       stack.append(cur)
+#       cur = cur.left
+
+# element = stack.pop()
+# counter += 1
+
+#  if counter == k:
+#       return element
+
+# cur = element.right
+
+# while cur:
+#       stack.append(cur)
+#       cur = cur.left
+
