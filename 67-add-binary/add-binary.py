@@ -6,24 +6,30 @@ class Solution(object):
         :rtype: str
         """
         
+        a_length = len(a) - 1
+        b_length = len(b) - 1
         carry = 0
+        result = ""
 
-        i = len(a) - 1
-        j = len(b) - 1
-        result = []
+        while a_length >= 0 or b_length >= 0:
+            if a_length >= 0:
+                cur_a = int(a[a_length])
+            else:
+                cur_a = 0
+            if b_length >= 0:
+                cur_b = int(b[b_length])
+            else:
+                cur_b = 0
 
-        while i >= 0 or j >= 0 or carry:
-            sum = carry
-            if i >= 0:
-                sum += int(a[i])
-                i -= 1
-            if j >= 0:
-                sum += int(b[j])
-                j -= 1
+            value = cur_a + cur_b + carry
 
-            result.append(str(sum % 2))
-            carry = sum // 2
+            carry = value // 2
 
-        result.reverse()
+            result += str(value % 2)
 
-        return "".join(result)
+            a_length -= 1
+            b_length -= 1
+        
+        if carry:
+            result += str(carry)
+        return result[::-1]
