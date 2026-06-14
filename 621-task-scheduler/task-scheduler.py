@@ -5,6 +5,7 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
+
         task_dict = {}
         heap = []
         queue = deque()
@@ -18,25 +19,16 @@ class Solution(object):
         time = 0
 
         while heap or queue:
-            if not heap:
-                time += 1
-
-                if queue[0][1] <= time:
-                    freq, _ = queue.popleft()
-                    heapq.heappush(heap, freq)
-                    
-                continue
-
-            current_freq = heapq.heappop(heap)
-            current_freq += 1
             time += 1
+
+            if heap:
+                current_freq = heapq.heappop(heap) + 1
+                if current_freq:
+                    queue.append((current_freq, time + n))
 
             if queue and queue[0][1] <= time:
                 freq, _ = queue.popleft()
                 heapq.heappush(heap, freq)
-
-            if current_freq != 0:
-                queue.append((current_freq, time + n))
 
         return time
 
