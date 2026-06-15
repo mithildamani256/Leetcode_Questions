@@ -4,14 +4,13 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        
-        n = len(nums)
-        visit = set()
+        res = 0
 
-        for i in range(len(nums)):
-            visit.add(nums[i])
+        for i in range(len(nums) + 1):
+            res = res ^ i
 
-        for i in range(0, n + 1):
-            if i not in visit:
-                return i
+        for value in nums:
+            res = res ^ value
+
+        return res
         
