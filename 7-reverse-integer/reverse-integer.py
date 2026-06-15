@@ -6,6 +6,7 @@ class Solution(object):
         :type x: int
         :rtype: int
         """
+
         MIN = -2147483648  # -2^31
         MAX = 2147483647   #  2^31 - 1
 
@@ -15,22 +16,21 @@ class Solution(object):
 
         MAX_MOD = MAX % 10            #  7
         
-        MIN_DIV = -(abs(MIN) // 10)      # -214748364
+        MIN_DIV = int(float(MIN) / 10)    # -214748364
 
         MIN_MOD = int(math.fmod(MIN, 10))   # -8
         
         res = 0
         while x:
             digit = int(math.fmod(x, 10))
-            print(digit)
 
-            if x < 0:
-                x = -int(abs(x) // 10)  
-            else:
-                x = int(x / 10)
-                
-            print(x)              
-            
+            x = int(float(x) / 10)
+
+            # if x < 0:
+            #     x = -int(abs(x) // 10)  
+            # else:
+            #     x = int(x / 10)
+
             # Positive overflow check
             if (res > MAX_DIV or 
                 (res == MAX_DIV and digit >= MAX_MOD)):
