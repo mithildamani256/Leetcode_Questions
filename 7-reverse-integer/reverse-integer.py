@@ -33,12 +33,12 @@ class Solution(object):
 
             # Positive overflow check
             if (res > MAX_DIV or 
-                (res == MAX_DIV and digit >= MAX_MOD)):
+                (res == MAX_DIV and digit > MAX_MOD)):
                 return 0
                 
             # FIX 2: Used the corrected MIN truncation boundaries here
             if (res < MIN_DIV or 
-                (res == MIN_DIV and digit <= MIN_MOD)):
+                (res == MIN_DIV and digit < MIN_MOD)):
                 return 0
                 
             res = (res * 10) + digit
