@@ -19,7 +19,7 @@ class DetectSquares(object):
         res = 0
         px, py = point[0], point[1]
 
-        for x,y in list(self.ptscount.keys()):
+        for x,y in (self.ptscount.keys()):
             if (abs(px - x) != abs(py - y)) or x == px or y == py:
                 continue
             
