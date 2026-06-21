@@ -4,16 +4,24 @@ class Solution(object):
         :type n: int
         :rtype: bool
         """
-        
-        seen = set()
+
+        hash_set = set()
+        hash_set.add(n)
 
         while n != 1:
-            if n in seen:
+            new_n = 0
+
+            for value in str(n):
+                new_n += int(value) ** 2
+            
+            if new_n in hash_set:
                 return False
 
-            seen.add(n)
+            hash_set.add(new_n)
 
-            n = sum(int(digit) ** 2 for digit in str(n))
+            n = new_n
+
+        return True
+
 
         
-        return True
