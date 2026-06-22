@@ -10,60 +10,41 @@ class Solution(object):
         :rtype: Optional[ListNode]
         """
 
-        dummy = ListNode()
-        dummy.next = head
-
-        new = dummy
         cur = head
-
+        dummy = ListNode()
+        node = dummy
+        
         while cur:
-            prev = None
-            while cur.next and cur.val == cur.next.val:
-                if not prev:
-                    prev = cur
+            flag = False
+
+            while cur.next and cur.next.val == cur.val:
                 cur = cur.next
+                flag = True
             
-            if (prev and prev != cur):
+            if flag:
                 cur = cur.next
                 continue
-            
-            new.next = cur
-            new = new.next
-            cur = cur.next
+            else:
+                node.next = cur
+                node = node.next
+                cur = cur.next
         
-        new.next = None
-
+        node.next = None
         return dummy.next
 
 
+
+# 1 -> 2 -> 3 -> 3 -> 4 -> 4 -> 5
+
+# cur = 1
+# while cur.next and cur.next.val == cur.val:
+#           flag = True
+#           cur = cur..next
+# if flag :
+#       cur = cur.next
+#       continue
+# else:
+#       node.next = cur
+#       node = node.next
+#       cur = cur.next
         
-
-
-
-# dummy = dummyNode()
-# dummy.next = head
-# new = dummy
-# prev = None
-# cur = head
-
-# while cur:
-#   prev = None
-    # while cur.next and cur.val == cur.next.val:
-    #     if not prev:
-    #           prev = cur
-    #     cur = cur.next
-
-    # if (prev and prev != cur):
-    #       cur = cur.next
-    #       continue
-
-    #new.next = cur
-    #new = new.next
-    # cur = cur.next
-# new.next = None
-
-
-#prev        new                                        cur
-#           1         ->          2           ->          2 
-
-# new=> 1 -> None
