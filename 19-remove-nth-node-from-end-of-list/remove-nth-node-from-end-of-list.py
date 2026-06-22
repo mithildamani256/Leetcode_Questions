@@ -11,23 +11,25 @@ class Solution(object):
         :rtype: Optional[ListNode]
         """
 
-        length = 0
-
-        current = head
-
-        while current:
-            current = current.next
-            length += 1
-        
-        iterate = length - n
-
         dummy = ListNode()
-        current = dummy
         dummy.next = head
 
-        for _ in range(iterate):
-            current = current.next
+        fast = dummy
+    
+        for _ in range(n):
+            fast = fast.next
 
-        current.next = current.next.next
+        slow = dummy
+
+        while fast.next:
+            fast = fast.next
+            slow = slow.next
+        
+        slow.next = slow.next.next
 
         return dummy.next
+
+#  1 -> 2 -> 3 -> 4 -> 5
+
+# n = 5
+# 
