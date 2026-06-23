@@ -1,66 +1,40 @@
-# Definition for singly-linked list.
-# class ListNode(object):
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
 class Solution(object):
     def sortList(self, head):
-        """
-        :type head: Optional[ListNode]
-        :rtype: Optional[ListNode]
-        """
+        if not head or not head.next:
+            return head
 
-        def merge(left, right):
-            dummy = ListNode()
-            cur = dummy
+        # split list into two halves
+        slow = head
+        fast = head.next
 
-            while left or right:
-                if left and right:
-                    if left.val > right.val:
-                        cur.next = right
-                        right = right.next
-                    else:
-                        cur.next = left
-                        left = left.next
-                
-                elif left:
-                    cur.next = left
-                    left = left.next
-                
-                else:
-                    cur.next = right
-                    right = right.next
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
 
-                cur = cur.next
-            
-            return dummy.next
+        right = slow.next
+        slow.next = None
+        left = head
 
-        def search(node):
-            if not node or not node.next:
-                return node 
+        # sort both halves
+        left_sorted = self.sortList(left)
+        right_sorted = self.sortList(right)
 
-            length = 0
-            cur = node
+        # merge sorted halves
+        return self.merge(left_sorted, right_sorted)
 
-            while cur:
-                cur = cur.next
-                length += 1
-            
-            mid = length // 2
-            dummy = ListNode()
-            dummy.next = node
-            cur = dummy
+    def merge(self, left, right):
+        dummy = ListNode()
+        cur = dummy
 
-            for _ in range(mid):
-                cur = cur.next
-            
-            right = cur.next
-            cur.next = None
+        while left and right:
+            if left.val <= right.val:
+                cur.next = left
+                left = left.next
+            else:
+                cur.next = right
+                right = right.next
 
-            left_sorted = search(node)
-            right_sorted = search(right)
+            cur = cur.next
 
-            return merge(left_sorted, right_sorted)
-        
-        return search(head)
-
+        cur.next = left if left else right
+        return dummy.next
