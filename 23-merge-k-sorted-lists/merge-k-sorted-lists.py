@@ -14,18 +14,23 @@ class Solution(object):
 
         for node in lists:
             if node:
-                heapq.heappush(heap, (node.val, node))
+                heap.append((node.val,node))
+
+        heapq.heapify(heap)
         
         dummy = ListNode()
         cur = dummy
-
+        
         while heap:
-            value, node = heapq.heappop(heap)
+            _, node = heapq.heappop(heap)
+            
             cur.next = node
             cur = cur.next
 
-            if node.next:
-                heapq.heappush(heap, (node.next.val, node.next))
+            node = node.next
+
+            if node:
+                heapq.heappush(heap, (node.val, node))
 
         return dummy.next
         
