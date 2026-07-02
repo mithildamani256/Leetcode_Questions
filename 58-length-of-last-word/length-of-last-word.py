@@ -5,27 +5,20 @@ class Solution(object):
         :rtype: int
         """
 
-        # lst = s.split()
+        i = len(s) - 1
 
-        # return len(lst[-1])
+        while s[i] == " ":
+            i -= 1
 
-        i = 0
+        length = 0
 
-        while i < len(s):
-
-            if s[i] == " ":
-                i += 1
-                continue
-
-            length = 0
-
-            while i < len(s) and s[i] != " ":
-                length += 1
-                i += 1
-
-            i += 1
+        while i >= 0 and s[i] != " ":
+            length += 1
+            i -= 1
 
         return length
+
+
 
 
 # "   fly me   to   the moon  "
