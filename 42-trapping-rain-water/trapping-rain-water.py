@@ -15,9 +15,3 @@ class Solution(object):
                 water += right_max - height[right]
 
         return water
-
-
-
-
-# if u know there is a smaller value and then there is a larher value, water can be trapped 
-#  
