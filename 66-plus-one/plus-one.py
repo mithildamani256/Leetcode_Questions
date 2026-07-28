@@ -8,31 +8,27 @@ class Solution(object):
         if not digits:
             return []
 
-        if digits[-1] == 9:
-            i = len(digits) - 1
-
-            while digits[i] == 9:
-                digits[i] = 0
-                i -= 1
-
-            if i >= 0:
-                digits[i] += 1
-            else:
-                digits = [1] + digits
-
-        else:
+        if digits[-1] != 9:
             digits[-1] += 1
 
-        return digits
-                
-# digits -> [1,2,3]
-# [1,2,4]
+            return digits
+        
+        counter = len(digits) - 1
 
-# [3,9]
-# => [4,0]
+        while digits[counter] == 9:
+            digits[counter] = 0
+            counter -= 1
+        
+        if counter >= 0:
+            digits[counter] += 1
+            return digits
+        
+        else:
+            return [1] + digits
 
-# [2,3,9,9]
-# => [2, 4,0,0]
-
-# [9]
-# [1,0]
+# 130-138 -> + 1 on least significant
+# 139 -> 140
+# 199 -> 200
+# 9 -> 10
+# 
+        
