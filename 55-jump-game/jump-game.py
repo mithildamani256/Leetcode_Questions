@@ -5,7 +5,7 @@ class Solution(object):
         :rtype: bool
         """
 
-        if len(nums) == 1:
+        if len(nums) == 0 or len(nums) == 1:
             return True
 
         goal = len(nums) - 1
@@ -18,4 +18,10 @@ class Solution(object):
                 return True
         
         return False
-        
+
+# [2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+
+# [2,3]
+# [3,3,4]
+# [3,4,4,5]
+# 4,4,5,4,5
