@@ -5,18 +5,17 @@ class Solution(object):
         :rtype: int
         """
 
-        max_length = 0
-        substr = ""
+        length = 0
+        left = 0
+        substring = set()
 
         for right in range(len(s)):
-            if s[right] not in substr:
-                substr = substr + s[right]
-                max_length = max(max_length, len(substr))
-            else:
-                while s[right] in substr:
-                    substr = substr[1:]
-                substr += s[right]
-
-
-        return max_length
+            while s[right] in substring:
+                substring.remove(s[left])
+                left += 1
+            
+            substring.add(s[right])
+            length = max(length, right - left + 1)
+        
+        return length
         
