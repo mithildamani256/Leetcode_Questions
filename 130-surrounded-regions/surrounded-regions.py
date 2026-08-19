@@ -16,14 +16,14 @@ class Solution(object):
             q.append((r,c))
             visit.add((r,c))
             region.append((r,c))
+            
+            directions = [(0,1), (1,0), (0,-1), (-1,0)]
 
             while q:
                 r,c = q.popleft()
 
                 if r == 0 or r == rows - 1 or c == 0 or c == cols - 1:
                     touches_border = True
-
-                directions = [(0,1), (1,0), (0,-1), (-1,0)]
 
                 for dr,dc in directions:
                     cur_row, cur_col = r + dr, c + dc
