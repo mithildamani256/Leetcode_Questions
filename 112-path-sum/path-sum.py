@@ -11,20 +11,14 @@ class Solution(object):
         :type targetSum: int
         :rtype: bool
         """
-
+        
         def dfs(root, target):
             if not root:
                 return False
             
             if not root.left and not root.right:
-                if root.val == target:
-                    return True
-                return False
+                return root.val == target
             
-            new_target = target - root.val
+            return dfs(root.left, target - root.val) or dfs(root.right, target - root.val)
 
-            return dfs(root.left, new_target) or dfs(root.right, new_target)
-
-        
         return dfs(root, targetSum)
-        
