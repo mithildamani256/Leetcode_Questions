@@ -42,10 +42,3 @@ class Solution(object):
                 return []
         
         return output
-
-        
-
-        
-        
-
-        
